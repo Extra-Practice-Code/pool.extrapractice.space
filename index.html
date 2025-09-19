@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pool.extrapractice.space</title>
+    <style>
+        body {
+            overflow: hidden;
+        }
+        #objects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        #objects img {
+            z-index: 1;
+            position: absolute;
+            will-change: transform;
+            pointer-events: none;
+            user-select: none;
+            z-index: 100;
+        }
+
+        #texts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1000;
+        }
+        #texts .text {
+            position: absolute;
+            will-change: transform;
+            pointer-events: none;
+            user-select: none;
+            color: white;
+            font-family: 'Arial Narrow', Arial, sans-serif;
+            font-size: 2.2vw;
+            font-weight: normals;
+            /* text-shadow: 0 2px 8px rgba(0,0,0,0.35); */
+            white-space: nowrap;
+            z-index: 3000;
+        }
+
+        img.floating-image {
+            max-width: 16vw;
+            height: auto;
+            display: block;
+        }
+
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            height: 200%;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="objects">
+        <img src="images/Stage_2_0000_Coffee.png" alt="">
+        <img src="images/Stage_2_0003_Plant.png" alt="">
+        <img src="images/Stage_2_0005_Sunflower.png" alt="">
+    </div>
+
+    <div id="texts">
+    </div>
+
+    <div id="photos">
+    </div>
+
+    <video src="https://attachments.are.na/39688372/0a0cd51cf9ac1bb6e221de91d8069504.mp4?1758291289" autoplay muted loop></video>
+
+    <script src="arena.js"></script>
+    
+    <script>
+        (function () {
+            const container = document.getElementById('objects');
+            const staticEls = Array.from(document.querySelectorAll('#objects img'));
+
+            function rand(min, max) { return Math.random() * (max - min) + min; }
+
+            const floats = [];
+
+            function createFloat(el) {
+                const isImage = el.tagName === 'IMG';
+                const isText = el.classList && el.classList.contains('text');
+                const isArenaAnchor = el.tagName === 'A';
+                const isIllustration = isImage && !isArenaAnchor && !!el.closest('#objects');
+                return {
+                    el,
+                    isImage,
+                    isText,
+                    isArenaAnchor,
+                    isIllustration,
+                    baseX: 0,
+                    y: 0,
+                    speedY: 0,
+                    driftAmplitude: 0,
+                    driftFrequency: 0,
+                    driftPhase: rand(0, Math.PI * 2),
+                    bobAmplitude: 0,
+                    bobFrequency: 0,
+                    rotationSpeed: rand(-8, 8),
+                    angle: rand(0, 0),
+                    widthPX: (isImage && !isArenaAnchor && isIllustration) ? 200 : undefined,
+                    widthVW: (isImage && !isArenaAnchor && !isIllustration) ? rand(4, 10) : undefined,
+                    scale: isArenaAnchor ? rand(0.55, 0.85) : 1
+                };
+            }
+
+            function addFloat(el) {
+                // Avoid duplicates
+                if (floats.some(f => f.el === el)) return;
+                // Ensure absolute positioning for animated elements
+                const style = el.style;
+                style.position = 'absolute';
+                style.willChange = 'transform';
+                style.transform = 'translate3d(-100vw, -100vh, 0)';
+                if (el.tagName === 'IMG' || (el.classList && el.classList.contains('text'))) {
+                    style.pointerEvents = 'none';
+                    style.userSelect = 'none';
+                }
+                if (el.tagName === 'A') {
+                    // Arena anchors may have left/top set; neutralize so transform fully controls position
+                    style.left = '0px';
+                    style.top = '0px';
+                }
+                const f = createFloat(el);
+                floats.push(f);
+                // Apply width for base images only (not anchors or text)
+                if (f.isImage && !f.isArenaAnchor) {
+                    if (f.widthPX) {
+                        el.style.width = `${f.widthPX}px`;
+                    } else if (f.widthVW) {
+                        el.style.width = `${f.widthVW}vw`;
+                    }
+                }
+                return f;
+            }
+
+            function setupStyles() {
+                // Only add static images to floating system, not text elements
+                staticEls.filter(el => el.tagName === 'IMG').forEach(addFloat);
+                // Also include any arena.js images already present
+                document.querySelectorAll('img.floating-image').forEach(img => {
+                    if (img.parentElement && img.parentElement.tagName === 'A') {
+                        addFloat(img.parentElement);
+                    } else {
+                        addFloat(img);
+                    }
+                });
+            }
+
+            function measureAndInit() {
+                const vw = window.innerWidth;
+                const vh = window.innerHeight;
+
+                floats.forEach((f) => initFloatParams(f, vw, vh));
+            }
+
+            function initFloatParams(f, vw = window.innerWidth, vh = window.innerHeight) {
+                if (!f.el.isConnected) return;
+                if (f.isImage && f.el.tagName === 'IMG') {
+                    if (f.widthPX) {
+                        f.el.style.width = `${f.widthPX}px`;
+                    } else if (f.widthVW) {
+                        f.el.style.width = `${f.widthVW}vw`;
+                    }
+                }
+                const rect = f.el.getBoundingClientRect();
+                const elWidth = rect.width || 100;
+                f.baseX = rand(0, Math.max(1, vw - elWidth));
+                f.y = vh + rand(0, vh * 0.8);
+                f.speedY = rand(vh * 0.02, vh * 0.05);
+                f.driftAmplitude = rand(vw * 0.01, vw * 0.04);
+                f.driftFrequency = rand(0.05, 0.12);
+                f.bobAmplitude = rand(vh * 0.005, vh * 0.015);
+                f.bobFrequency = rand(0.3, 0.8);
+                // Set z-index: illustrations highest, then arena images below
+                if (f.isIllustration) {
+                    f.el.style.zIndex = String(2000 + Math.floor(rand(0, 100)));
+                } else if (f.isArenaAnchor || (f.isImage && !f.isIllustration)) {
+                    // Arena images and other images go below illustrations
+                    f.el.style.zIndex = String(100 + Math.floor(rand(0, 50)));
+                } else {
+                    f.el.style.zIndex = String(1 + Math.floor(rand(0, 10)));
+                }
+            }
+
+            let lastTime = performance.now();
+
+            function animate(now) {
+                const dt = Math.min(0.033, (now - lastTime) / 1000);
+                lastTime = now;
+                const vw = window.innerWidth;
+                const vh = window.innerHeight;
+
+                for (let i = floats.length - 1; i >= 0; i--) {
+                    const f = floats[i];
+                    if (!f.el.isConnected) { floats.splice(i, 1); continue; }
+                    f.y -= f.speedY * dt;
+                    const t = now / 1000;
+                    const drift = Math.sin(t * Math.PI * 2 * f.driftFrequency + f.driftPhase) * f.driftAmplitude;
+                    const bob = Math.sin(t * Math.PI * 2 * f.bobFrequency + f.driftPhase) * f.bobAmplitude;
+                    f.angle += f.rotationSpeed * dt;
+
+                    f.el.style.transform = `translate3d(${Math.round(f.baseX + drift)}px, ${Math.round(f.y + bob)}px, 0) rotate(${f.angle.toFixed(1)}deg) scale(${(f.scale || 1).toFixed(2)})`;
+
+                    const rect = f.el.getBoundingClientRect();
+                    if (f.y + rect.height < -40) {
+                        // Respawn below with new random params
+                        if (f.isImage && f.widthVW) {
+                            f.widthVW = rand(4, 10);
+                            f.el.style.width = `${f.widthVW}vw`;
+                        }
+                        if (f.isArenaAnchor) {
+                            f.scale = rand(0.55, 0.9);
+                        }
+                        const newRect = f.el.getBoundingClientRect();
+                        f.baseX = rand(0, Math.max(1, vw - newRect.width));
+                        f.y = vh + rand(newRect.height * 0.5, vh * 0.8);
+                        f.speedY = rand(vh * 0.02, vh * 0.05);
+                        f.driftAmplitude = rand(vw * 0.01, vw * 0.05);
+                        f.driftFrequency = rand(0.05, 0.12);
+                        f.bobAmplitude = rand(vh * 0.005, vh * 0.02);
+                        f.bobFrequency = rand(0.3, 0.9);
+                        f.rotationSpeed = rand(-12, 12);
+                        f.angle = rand(0, 360);
+                        f.driftPhase = rand(0, Math.PI * 2);
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            function start() {
+                setupStyles();
+                // Try to decode initial images; fall back immediately for text and anchors
+                const decoders = staticEls
+                    .filter(el => el.tagName === 'IMG')
+                    .map(img => (img.decode ? img.decode().catch(() => {}) : Promise.resolve()));
+                Promise.all(decoders).then(() => {
+                    measureAndInit();
+                    lastTime = performance.now();
+                    requestAnimationFrame(animate);
+                });
+                // Observe for arena.js injected images
+                const observer = new MutationObserver((mutations) => {
+                    for (const m of mutations) {
+                        m.addedNodes.forEach(node => {
+                            if (!(node instanceof HTMLElement)) return;
+                            if (node.matches && node.matches('img.floating-image')) {
+                                const parent = node.parentElement && node.parentElement.tagName === 'A' ? node.parentElement : node;
+                                const f = addFloat(parent);
+                                const img = node;
+                                const initWhenReady = () => initFloatParams(f);
+                                if ((img).complete && (img).naturalWidth > 0) {
+                                    initWhenReady();
+                                } else {
+                                    img.addEventListener('load', initWhenReady, { once: true });
+                                }
+                            } else {
+                                // Search within subtree
+                                node.querySelectorAll && node.querySelectorAll('img.floating-image').forEach(img => {
+                                    const parent = img.parentElement && img.parentElement.tagName === 'A' ? img.parentElement : img;
+                                    const f = addFloat(parent);
+                                    const initWhenReady = () => initFloatParams(f);
+                                    if ((img).complete && (img).naturalWidth > 0) {
+                                        initWhenReady();
+                                    } else {
+                                        img.addEventListener('load', initWhenReady, { once: true });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+                observer.observe(document.body, { childList: true, subtree: true });
+
+                // Load essay data and start spawning texts
+                loadEssayAndStartTextSpawning();
+            }
+
+            // Text spawning system
+            let essayParagraphs = [];
+            let textQueue = [];
+            const MAX_TEXTS = 3;
+            const TEXT_SPAWN_INTERVAL = 5000;
+
+
+            function spawnText() {
+                if (!essayParagraphs.length) return;
+                
+                const currentTexts = document.querySelectorAll('#texts .text').length;
+                if (currentTexts >= MAX_TEXTS) {
+                    setTimeout(spawnText, TEXT_SPAWN_INTERVAL);
+                    return;
+                }
+
+                // Reshuffle if needed
+                if (textQueue.length === 0) {
+                    textQueue = [...essayParagraphs];
+                    for (let i = textQueue.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [textQueue[i], textQueue[j]] = [textQueue[j], textQueue[i]];
+                    }
+                }
+
+                const paragraph = textQueue.pop();
+                
+                const textEl = document.createElement('div');
+                textEl.className = 'text';
+                textEl.textContent = paragraph;
+                
+                // Position text for marquee animation
+                const vh = window.innerHeight;
+                const randomY = Math.random() * (vh - 100); // Random vertical position
+                textEl.style.top = randomY + 'px';
+                textEl.style.left = '100vw'; // Start off-screen right
+                
+                document.getElementById('texts').appendChild(textEl);
+
+                // Animate marquee across screen
+                const duration = 30000 + Math.random() * 20000; // 30-50 seconds
+                textEl.animate([
+                    { transform: 'translateX(0)' },
+                    { transform: 'translateX(-120vw)' } // Move completely off-screen left
+                ], {
+                    duration: duration,
+                    easing: 'linear'
+                }).onfinish = () => {
+                    if (textEl.isConnected) {
+                        textEl.remove();
+                    }
+                };
+
+                // Schedule next spawn
+                setTimeout(spawnText, TEXT_SPAWN_INTERVAL);
+            }
+
+            function loadEssayAndStartTextSpawning() {
+                fetch('essay.json')
+                    .then(async (res) => {
+                        const raw = await res.text();
+                        try {
+                            const data = JSON.parse(raw);
+                            // Handle the new essay.json structure with "text" array
+                            if (data.text && Array.isArray(data.text)) {
+                                return data.text;
+                            }
+                            return Array.isArray(data) ? data : [];
+                        } catch (e) {
+                            return raw.split(/\n\s*\n/).map(s => s.replace(/\s+/g, ' ').trim()).filter(Boolean);
+                        }
+                    })
+                    .then((paragraphs) => {
+                        essayParagraphs = paragraphs.filter(p => p.length > 20); // Only substantial paragraphs
+                        // Start spawning texts
+                        for (let i = 0; i < 2; i++) {
+                            setTimeout(spawnText, i * 1200);
+                        }
+                    })
+                    .catch(console.error);
+            }
+
+            window.addEventListener('resize', () => {
+                measureAndInit();
+            });
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', start);
+            } else {
+                start();
+            }
+        })();
+    </script>
+</body>
+</html>
