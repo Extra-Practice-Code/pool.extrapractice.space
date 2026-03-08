@@ -4,11 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Pool</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Welcome to the Pool</h1>
-    <h2>The Pool is an experimental support structure based on incoming pooling at <a href="https://extrapractice.space/">Extra Practice</a>.</h2>
 
-    
+    <section id="main">
+        <div id="header">
+            <h1>welcome to the pool</h1>
+            <h2>the pool is an experimental support structure based on incoming pooling at <a href="https://extrapractice.space/">extra practice</a>.</h2>
+            <div id="menu">
+                <p><a href="#what">what is the pool?</a></p>
+                <p><a href="#thoughts">thoughts and reflections</a></p>
+                <p><a href="#structure">structure</a></p>
+            </div>
+
+            <div id="content">
+                <h2 id="what">❋ what is the pool?</h2>
+                <p>The pool is an experimental model for incoming pooling between freelancers as a means of creating a support structure. It is currently being piloted at Extra Practice between a group of five independent designers, artists and researchers. For the year of 2026, these five individuals will share their incomes between one another in an effort to create more stability for one another. In doing so, the hope is that various stressors that stem from work and money may be somewhat alleviated and that individuals may be able to grow together.</p>
+                <p>This website holds information about the pool that includes the on-going development of it's model, thoughts and reflections from the participants and some technical details.</p>
+                <p>The current partipants in this experiment are:</p>
+                <ul>
+                    <li><a href="https://jackbardwell.com/">Jack Bardwell</a></li>
+                    <li><a href="https://supergijs.com/">Gijs de Boer</a></li>
+                    <li><a href="https://bnjmnearl.eu/">Benjamin Earl</a></li>
+                    <li><a href="https://kirstenspruit.com/">Kirsten Spruit</a></li>
+                    <li><a href="https://emmaverhoeven.nl/">Emma Verhoeven</a></li>
+                </ul>
+                <p>If you're interested in getting in contact then please reach out via <a href="mailto:mail@extrapractice.space">e-mail</a>.</p>
+                
+                <h2 id="thoughts">❋ thoughts and reflections</h2>
+                <p>In the process of setting up the pool, the desire arose for a space in which we could write reflections and thoughts on the process so far. Not only as a way to share with other people, but also with each other. Below you will find a log of reflections from the participants of the pool. </p>
+            
+                <details>
+                <summary>08.03.2026 - Jack</summary>
+                I had a thought about the pool.
+                </details>
+
+                <details>
+                <summary>02.03.2026 - Emma</summary>
+                The pool makes me excited because...
+                </details>
+
+                <details>
+                <summary>24.02.2026 - Kirsten</summary>
+                In the future, I hope that the pool can be...
+                </details>
+
+                <details>
+                <summary>22.02.2026 - Gijs</summary>
+                When thinking about formats for the pool, I came across this example...
+                </details>
+
+                <details>
+                <summary>12.02.2026 - Ben</summary>
+                The pool makes me think about...
+                </details>
+                
+                <h2 id="structure">❋ the pool structure</h2>
+                <p>The pool's structure is a work in progress. Since 2025 we have been prototyping different models for incoming pooling. In this section of the website, you will be able to find past conceptions of what the pool might look like and what it looks like in its current form.</p>
+
+            </div>
+        </div>
+    </section>
+    <div id="footer">
+        <p>the pool is a project by the members of Extra Practice, a space for learning and working (and growing) together. You can find out more about xp by visiting <a href="https://extrapractice.space/">extrapractice.space</a></p>   
+    </div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const colors = [
+    "#fdee81",
+    "#b6b6b6",
+    "#db98f4",
+    "#9df498",
+    "#fc9e76"
+  ];
+
+  let colorIndex = 0;
+
+  const testPhrase = /the pool/i;
+  const replacePhrase = /the pool/gi;
+
+  const walker = document.createTreeWalker(
+    document.body,
+    NodeFilter.SHOW_TEXT,
+    null,
+    false
+  );
+
+  const nodes = [];
+  let node;
+
+  while (node = walker.nextNode()) {
+    nodes.push(node);
+  }
+
+  nodes.forEach(node => {
+    if (testPhrase.test(node.nodeValue)) {
+
+      const span = document.createElement("span");
+
+      span.innerHTML = node.nodeValue.replace(replacePhrase, (match) => {
+        const color = colors[colorIndex % colors.length];
+        colorIndex++;
+        return `<span style="background-color:${color}">${match}</span>`;
+      });
+
+      node.parentNode.replaceChild(span, node);
+    }
+  });
+
+});
+</script>
+
 </body>
 </html>
+
