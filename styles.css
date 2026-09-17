@@ -1,11 +1,26 @@
+body {
+    font-family: "Arial Narrow";
+}
+
 .pool-image {
     width: 75%;
-    height: 75vh;
     margin: 0 auto;
 }
 
 img {
     width: 100%;
+}
+
+.enter {
+    width: 150px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.enter-button {
+    background-color: cornflowerblue;
+    border-radius: 10px;
+    padding: 10px 20px;
 }
 
 @media (max-width: 699px) {
