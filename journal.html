@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Pool Journal</title>
+    <style>
+        body {
+            background-color: #7bb6c7;;
+        }
+        #journal-container {
+            display: flex;
+        }
+        .block {
+            background-color: #9ed9e9;
+            width: 200px;
+            height: 200px;
+            margin: 10px;
+            padding: 5px;
+        }
+        P {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="journal-container"></div>
+</body>
+<script>
+
+    const journal = document.getElementById("journal-container")
+
+    function fetchArena() {
+        fetch('https://api.are.na/v3/channels/pool-journal/contents', {
+            headers: {
+                'Authorization': 'Bearer {1aDVyADpS-_tV2dKIWGTMbnJ3i3fxqQP-igyZDdJfH4}'
+            }
+        })
+
+    .then(res => res.json())
+    .then(data => {
+        console.log(data.data);
+        data.data.forEach(block => {
+            if(block.type === "Text") {
+                const txtBlock = document.createElement("p");
+                txtBlock.classList.add("block");
+                txtBlock.textContent += block.content.plain;
+                journal.append(txtBlock);
+            } else if (block.type === "Image") {
+                const imgBlock = document.createElement("img");
+                imgBlock.classList.add("block");
+                imgBlock.src = block.image.large.src;
+                journal.append(imgBlock);
+            } else if (block.type === "Link") {
+                const linkBlock = document.createElement("a");
+                linkBlock.classList.add("block");
+                linkBlock.href = block.source.url;
+                linkBlock.textContent += block.title;
+                journal.append(linkBlock);
+            } else {
+                return;
+            }
+        });
+    })
+    .catch(err => console.error(err));
+    }
+
+    fetchArena();
+
+
+
+
+
+</script>
+</html>
