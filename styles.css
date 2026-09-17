@@ -7,3 +7,9 @@
 img {
     width: 100%;
 }
+
+@media (max-width: 699px) {
+  .pool-image {
+    width: 100%;
+  }
+}
