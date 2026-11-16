@@ -3,22 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Pool</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>The Pool by Extra Practice</title>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link rel="stylesheet" href="/assets/css/_normalize.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    
 </head>
 <body>
-<div class="pool-image">
-  <a href="https://extrapractice.space/">
-    <img src="pool-2x2-blue.png" alt="A 2x2 graphic showing alone/together on one axis and floating/drowning on the other and mapping different forms of groups">
-  </a>
-</div>
+    <div class="container">
+        <header>
+            <img src="assets/img/warning-sign.png" alt="" class="header-img">
+            <div class="heading-text">
+                <h1>The Pool</h1>
+            </div>
+            <div class="menu">
+                <a href="">The Pool Rules</a><a href="">The Pool Tools</a><a href="">F.A.Q.</a>
+            </div>
 
-<div class="enter">
-  <p>pool website coming soon<br>
-    in the meantime theres<br>
-  <button type="button" class="enter-button" onclick="window.location.href='https://extrapractice.space/'">extra practice</button>
-</div>
+        </header>
+        <div class="main content__grid">
 
+            <!-- LEFT COLUMN -->
+            <div class="left-side content__column--3">
+                
+                <figure class="side-column-el" id="sidenote-1">
+                <img src="assets/img/interdependence.jpg" alt="">
+                <figcaption><a href="#footnote-1"><span class="pool-note">1</span></a> An example of interdependence</figcaption>
+                </figure>
+
+                <figure class="side-column-el" id="sidenote-3">
+                <img src="assets/img/doubts.jpg" alt="">
+                <figcaption><a href="#footnote-3"><span class="pool-note">3</span></a> A photo of The Pool exhibition at Foundation We Are in Eindhoven, 2026, that features all some of our fears</figcaption>
+                </figure>
+
+            </div>
+
+            <!-- MIDDLE COLUMN -->
+            <div class="middle content__column--6">
+                <div class="intro">
+                    <p>The Pool is five designers sharing their money. Each month they put everything they earn into one bank account. Then they each get 2000 euros from that bank account. The five designers each have their own business. They can decide who they work for and what they do. But because some months they earn a lot and other months they earn a little, by putting it all in one pile and then sharing it each month, they spend less time worrying about their bank account being empty, and they can spend more time on what they need, for example: finding work they like, exploring new ideas, resting, writing XP newsletters, caring for others, and more.</p>
+                </div>
+
+
+                <div class="text-section">
+                    <h2>The Pool Rules</h2>
+                    <p>Like any pool, The Pool has a few rules to make sure nobody gets hurt. These rules were created during the creation of The Pool:</p>
+                    <ol class="roman">
+                        <li>
+                            <details id="rule-I">
+                                <summary>Take off your individualism before entering </summary>
+                                Joining a Pool means committing to a more collective way of thinking. Not only about money and work, but about life as a whole, and all the other ‘currencies’ that flow between people. You are willing to see yourself not just as an independent individual, but as a part of a larger system. <a href="#sidenote-1"><span class="pool-note" id="footnote-1">1</span></a> You understand that being part of the Pool makes you stronger and more resilient, and you also understand that keeping this system healthy means putting effort, care, time and energy into it. You see the value in all of this.
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                                <summary>Every month pour all your income into the pool</summary>
+                                In the first week of the month, each Pool member adds up all their income that they got paid for in the previous month. We only count income from labour: hours worked, on any type of project. <br>
+                                <br>
+                                V.O.F. Extra Practice will <u>invoice</u> each member for that amount. Everything includes VAT. The invoice says “<i>The Pool — support [month]</i>”<br>
+                                <br>
+                                This amount is transferred by the member to the Pool bank account (a Triodos business savings account under Extra Practice) <a href="#sidenote-2"><span class="pool-note" id="footnote-2">2</span></a>
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                            <summary>
+                                Every month you’ll receive €2000
+                            </summary>
+                            Every month, each Pool member will <u>invoice</u> V.O.F. Extra Practice for €2000. This <u>invoice</u> says “<i>The Pool — research [month]</i>”, because we consider this pilot year a form of research.<br><br>
+
+                            €2.420 is transferred to each Pool member on the 1st of the month.
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                                <summary>
+                                    Be honest about your doubts and fears
+                                </summary>
+                                Joining a Pool is a big deal. You are no longer just responsible for your own finances. Your income becomes dependent on others, and others become dependent on your income.This can feel scary and bring up many feelings: fears of sharing, guilt about receiving, desires to save your own skin. <a href="#sidenote-3"><span class="pool-note" id="footnote-3">3</span></a> Here is a list of doubts we have felt and worked through in meetings leading up to starting the Pool:
+                                <ul class="styled-list">
+                                    <li>what if I don’t earn enough?</li>
+                                    <li>what if others don’t earn enough?</li>
+                                    <li>is €2000 enough for me?</li>
+                                    <li>what if we get in a fight about money?</li>
+                                    <li>will the others judge my financial choices?</li>
+                                    <li>what if I want to leave or take a long sabbatical?</li>
+                                    <li>are we putting more pressure on ourselves to work and earn harder?</li>
+                                    <li>what if the pool prevents me from saving up for a house?</li>
+                                    <li>will this not make everything feel móre transactional?</li>
+                                    <li>what if we don’t live in the same place anymore?</li>
+                                    <li>is the belastingdienst ok with this?</li>
+                                    <li>what if people just profit and leave?</li>
+                                    <li>are people going to resent me for not making enough?</li>
+                                    <li>is it fair if I will always be the top earner?</li>
+                                    <li>what if I want to start a family?</li>
+                                    <li>are we losing too much time on pool admin?</li>
+                                </ul><br>
+                                <button type="button">submit a doubt/question</button><br><br>
+                                Remember it is okay to have doubts and fears. The most important thing is voicing them, out loud, to the other Pool members. Before starting the Pool pilot, we had many, many meetings going through each of these questions. This means you have to be willing to be very honest, and show sides of yourself that you might not like: anxious, jealous, selfish, strict, suspicious. And you need to be willing to listen to the other Pool members and accept, without judgement, that they too have those sides. This is all part of shedding layers of individualism <a href="#rule-I"><span class="middle-link">See X. Take off your individualism before entering</span></a><br><br>
+                                Before starting the Pool pilot, we had many, many meetings going through each of these questions. In fact, the answers and solutions we came up with became the base for <a href="">The Pool Contract</a>. 
+
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                                <summary>
+                                    Trust the other members (and sign the contract)
+                                </summary>
+                                The Pool cannot exist without trust. We trust each other. Things you have to trust in before entering a Pool:<br>
+                                <ul class="styled-list">
+                                    <li>other Pool members care about the Pool staying healthy </li>
+                                    <li>other Pool members care about your general well-being</li>
+                                    <li>other Pool members want everybody in the Pool to thrive</li>
+                                    <li>other Pool members contribute what they can to the Pool, both financially and in other currencies <a href="#rule-X"><span class="middle-link">See X. Money us not the only currency</span></a></li>
+                                    <li>other Pool members are honest about how they feel</li>
+                                    <li>this is an experiment, and even if it fails, it is worth completing</li>
+                                    <li>other Pool members will not take advantage of me or the Pool</li>
+                                    <li>other Pool members follow the Pool Rules and <a href="">The Pool Contract</a></li>
+                                </ul>
+                                <br>
+                                In the contract we included practical things, like conditions for joining The Pool:<br><br>
+                                <ol>
+                                    <li>you are registered as a freelancer at KvK;</li>
+                                    <li>you trust the other members of The Pool;</li>
+                                    <li>you are part of a <a href="https://a-tub.org/en/broodfonds">Broodfonds</a>, or have another safety net in place for when you cannot work;</li>
+                                    <li>you are in possession of a healthy personal financial buffer (after transferring the Pool buffer)<a href="#rule-VI"><span class="middle-link">See VI. Money us not the only currency</span></a></li>
+                                </ol>
+                            </details>
+                        </li>
+                        <li><details id="rule-VI">
+                            <summary>€4000 safety deposit required upon entry</summary>
+                            The Pool is there to stabilise income. As freelancers, it can be challenging to get paid enough money every single month, so that you can pay your rent and groceries. Sometimes when you are doing a job for someone, they only pay you when the job is completed, and it can take longer than one month. This means some months you have very little in the bank, and other months a lot more, and it can be hard to know how much you can spend or save. It can lead to feelings of anxiety and stress, making you more inclined to say yes to underpaid jobs. Not knowing when your next work opportunity will arise, a feeling of scarcity might also make you say yes to too many things at once.<br><br>
+
+                            The Pool basically functions as a collective buffer for these gaps in our individual incomes. This means that, to start up The Pool, we had to fill it up enough to be able to cover two months of ‘wage’. That’s why we all poured €4000 into The Pool. This may sound like a lot, but is way less than the buffer you would need as an independent freelancer. Looking at our incomes in the past years, we needed a 4 to 6 month buffer to stay afloat. Collectivising.<br><br>
+                        </details>
+                            </li>
+                        <li>
+                            <details>
+                            <summary>Take care of your lane in the spreadsheet</summary>
+                            Running a Pool takes a lot of administration. We share that work, which means we collectively keep <a href="">The Big Spreadsheet</a> up to date. There we fill in our expected, sent and paid invoices for each month, so we can have a good estimation of the health of the Pool for the coming months, and feel more secure together.<br><br>
+
+                            The Big Spreadsheet took a lot of work to build and develop, and is essential to the functionality of the Pool. It tells us how much is currently in The Pool and shows predictions till the end of the year. It also tells us how much to transfer each month, and how much <a href="">end-of-year bonus</a> each member is expected to receive.<br><br>
+
+                            Of course, everybody forgets sometimes. That’s why we have the <a href="">Lifeguard</a>, who will check every month if the spreadsheet is up to date, reminds people to file in their invoices and to transfer their income to The Pool.<br><br>
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                            <summary>The lifeguard on duty monitors the pool levels</summary>
+                            The <a href="">Life Guard</a> checks the Pool health: is there enough in The Pool to survive if not all expected invoices come through? <br><br>
+
+                            Each quarter, the Lifeguard…<br><br>
+                            
+                            <ol>
+                                <li>checks that all members have filed their monthly income overview,</li>
+                                <li>check all members have generated invoice from xp to themselves</li>
+                                <li>checks is members have transferred their monthly labour incomes</li>
+                                <li>monitors the health of the Pool account,</li>
+                                <li>reports to the group at the quarterly check-in (see Art. 9),</li>
+                                <li>calculates overflow and presents the breakdown at the end-of-year meeting.</li>
+                            </ol><br><br>
+
+                            If anything looks concerning, <u>Life Guard</u> calls a <u>meeting</u>.
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                            <summary>You may receive an en-of-year bonus</summary>
+                            At the end of the year, if the Pool has a surplus after all wages have been paid, this overflow is redistributed to Pool members in proportion to how much each contributed during the year. Members who contributed more receive a larger share of the overflow.<br><br>
+
+                            The [Lifeguard] calculates the overflow in the second half of December (when all payments have been made) and presents a breakdown at the end-of-year meeting. Individual overflow payments are made within 30 days of that meeting.
+                            </details>
+                        </li>
+                        <li>
+                            <details id="rule-X">
+                            <summary>Money is not the only currency</summary>
+                            As a freelance creative, it is nice to share a work space with other creatives. You can split the rent costs, buy tools together, and share groceries. With those groceries you can cook a warm lunch every day. You sometimes cook for the rest, and other days, the rest cooks for you. [link to recipes are.na] You also share other responsibilities like cleaning, and writing the shared [newsletter].<br><br> 
+
+                            When you are not feeling good, or struggling with something, professionally or privately, others are there for you to listen and give you advice. When someone hears of a job, they might recommend you for it. You might collaborate together on projects, artistic or commercial, and learn from each other. You studio member might teach you a song on the guitar, share their home baked bread with you, or tell you about a nice event. There is a lot of exchanging and sharing happening besides money. And everything has value.<br><br>
+
+                            Sometimes you are so busy with work, you do not have the time to contribute to everything. No time to shop for groceries or cook a big meal or write a newsletter. You just need to focus on your work. You are stressed!<br><br>
+
+                            Being in The Pool can make you feel more okay about focusing on one thing. There may be another Pool member that is not busy at all this month. But thanks to The Pool, they are not too stressed about it. Now they have space to help you with your work, pick up some extra studio chores, or cook you a healthy, nurturing lunch. This makes you feel good, less stressed. It helps you focus on your work. The cook can feel useful too. You fill The Pool this month, they fill your plate. Win-win!
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                            <summary>No diving into new work if conditions are unclear</summary>
+                            When you are in a Pool, the payment you receive is not only for yourself. There are other Pool members that depend on there being enough money in the Pool bank account every month. This responsibility can help you be more professional about working conditions and payment.<br><br>
+
+                            When a client asks you: *can you do this for me?* this feeling of responsibility may help you say: well client, it depends. I need to know this, this and this information before I can say yes to doing this work.<br><br>
+
+                            We made a tool together to help us, and other freelancers, decide whether to take on work or not. [link to flowchart]<br><br>
+
+                            When a client asks you: how much does this work cost? this feeling of responsibility may help you say: well client, it costs this much (a fair price [link to something about fair pay???]: minimum 60€ per hour or €500 per day). And when your client forgets to pay their invoice, you may feel this responsibility again and say: hey client, please remember to pay this invoice! so that the money can fill up The Pool in time.
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                            <summary>Don’t let go of your dreams and ideals</summary>
+   
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                            <summary>Remember those who swam before you</summary>
+   
+                            </details>
+                        </li>
+                    </ul>
+                </div>
+
+                <h2>The Pool Tools</h2>
+
+                <h2>F.A.Q.</h2>
+
+            
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="right-side content__column--3">
+                <figure class="side-column-el" id="sidenote-2">
+                <img src="assets/img/emma-invoice.png" alt="" class="outline">
+                <figcaption><a href="#footnote-2"><span class="pool-note" >2</span></a> One of Emma's invoices</figcaption>
+                </figure>
+                
+            <figure class="side-column-el" id="sidenote-4">
+                <img src="assets/img/lifeguard-screenshot.jpeg" alt="">
+                <figcaption><a href="#footnote-2"><span class="pool-note" >4</span></a> Messages from Lifeguard Ben</figcaption>
+            </figure>
+        </div>
+    </div>
 </body>
 </html>
+
+
 

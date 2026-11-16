@@ -1,0 +1,221 @@
+:root {
+    --font-size-small: 0.8rem;
+    --max-width-text: 40em;
+    --max-width-full: calc(100vw - 2rem);
+}
+
+html {
+    font-size: 20px;
+}
+
+body {
+    font-family: "Arial Narrow";
+    background-color: white;
+    color: #3087c9;
+}
+
+a,a:visited {
+    color: #3087c9;
+}
+
+/* a:hover {
+    color: red;
+} */
+
+img {
+    width: 100%;
+}
+
+video {
+    width: 100%;
+}
+
+.outline {
+    border: 1px solid grey;
+}
+
+.list-reset {
+    margin:0;
+    padding: 0;
+    text-indent: 0px;
+}
+
+.content__grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+    max-width: 1275px;
+    margin: 0 auto;
+}
+/* 1/1 */
+.content__column--12 { grid-column: span 12;} 
+/* 2/3 */
+.content__column--8 { grid-column: span 8;}
+/* 1/2 */
+.content__column--6 { grid-column: span 6;}
+/* 1/3 */
+.content__column--4 { grid-column: span 4;}
+/* 1/4 */
+.content__column--3 { grid-column: span 3;}
+
+@media only screen and (max-width: 744px) {
+    /* 2/3 -> 1/1 */
+    .content__column--8 { grid-column: span 12;}
+    /* 1/2 -> 1/1 */
+    .content__column--6 { grid-column: span 12;}
+    /* 1/3 -> 1/1 */
+    .content__column--4 { grid-column: span 12;}
+    /* 1/4 --> 1/2 */
+    .content__column--3 { grid-column: span 6;}
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 120px;
+    margin: 0;
+}
+h2 {
+    font-weight: normal;
+    font-size: 40px;
+}
+h3 {
+    font-weight: normal;
+}
+p {
+    font-size: 24px;
+    line-height: 1.25em;
+}
+
+ul {
+    list-style: none;
+}
+
+ol.roman {
+    list-style-type: upper-roman;
+}
+
+.middle-link {
+    font-size: 14px;
+    background-color: white;
+    color: #3087c9;
+}
+
+.styled-list {
+    list-style-type: circle;
+    margin-top: 10px;
+}
+
+figure {
+    margin: 0;
+}
+
+figcaption {
+    margin-top: 5px;
+    font-size: 15px;;
+}
+
+.container {
+    padding: .75rem;
+}
+
+.header-img {
+    width: 150px;
+
+}
+
+.pool-note {
+    border: 1px solid #3087c9;
+    border-radius: 50%;
+    padding: 0px 8px;
+    background-color: #3087c9;
+    color: white;
+    font-weight: normal;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.pool-note:hover {
+    background-color: white;
+    color: #3087c9;
+    border: 1px solid #3087c9;
+    text-decoration: none;
+}
+
+header {
+    text-align: center;
+}
+
+.menu a {
+    margin-right: 20px;
+}
+
+.side-column-el {
+    margin-top: 50px;
+}
+
+.text-section {
+    margin-top: 100px;
+}
+
+
+details {
+  border-block-end: 1px solid #3087c9;;
+  margin-block: .5rem;
+  padding-block: .5rem;
+  font-size: 24px;
+}
+
+summary {
+  /* Pin the custom marker to the container */
+  position: relative;
+  /* Register summary as an anchor element */
+  anchor-name: --summary;
+  padding-bottom: 10px;
+  font-weight: bold;
+  
+  
+  &::marker {
+    content: "";
+  }
+  
+  &::before,
+  &::after {
+    /* Custom marker dimensions */
+    content: "↓";
+    /* border-block-start: 3px solid #3087c9;; */
+    /* height: 0;
+    width: 1rem; */
+    
+    /* Positions the lines */
+    /* inset-block-start: 50%; */
+    inset-inline-end: 0;
+    
+    /* Anchor the shape to the summary */
+    position: absolute;
+    position-anchor: --summary;
+    position-area: top end;
+  }
+  
+  /* Rotate just the ::after line to create a "+"" shape */
+  &::after {
+    /* transform: rotate(180deg);
+    transform-origin: 50%; */
+  }
+}
+
+/* Rotate the line when open */
+details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+button {
+  background-color: #3087c9;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
